@@ -15,7 +15,7 @@
 		setTimeout(()=>{
 			document.body.style.overflow = "";
 			webReady = true;
-		}, 1000);
+		}, 500);
 	}
 	//
 	// theme mode
