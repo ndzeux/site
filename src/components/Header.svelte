@@ -88,7 +88,7 @@
                         ad06e2      </svg>
                 {/if}
             </button>
-            <button on:click="{showNav}"
+            <button on:click="{showNav}" aria-label="open-menu-btn"
             class="text-dbluegray dark:text-white ml-4 bg-gray-100 dark:bg-mbluegray rounded-md w-12 h-12 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-mbluegray focus:ring-offset-2 ring:offset-gray-100 dark:ring-offset-dbluegray md:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
