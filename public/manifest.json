@@ -1,0 +1,29 @@
+{
+    "name": "Ndzeux",
+    "short_name": "Ndzeux",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#033246",
+    "theme_color": "#033246",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/src/logo/96.png",
+            "type": "image/png",
+            "sizes": "96x96",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/src/logo/192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/src/logo/512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable any"
+        }
+    ]
+}
