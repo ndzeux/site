@@ -37,7 +37,6 @@
     }
     getData("writing", writings);
     getData("projects", projects);
-    $: console.log(writings);
 </script>
 
 <svelte:head>
