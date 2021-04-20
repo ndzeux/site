@@ -106,7 +106,7 @@
                     <img src="{data.thumbnail}" alt="{data.title}" class="w-0 object-cover max-h-60" on:load="{(e) => {e.target.classList.remove("w-0");e.target.classList.add("w-full")}}">
                 </div>
                 {/if}
-                <a use:link href="/{on}/{data.slug}" class="block mt-2"><h3 class="font-bold text-xl md:text-2xl">{data.title}</h3></a>
+                <a use:link href="/{on}/{data.slug}" class="block mt-2"><h2 class="font-bold text-xl md:text-2xl">{data.title}</h2></a>
                 <p class="md:text-lg">{data.description}</p>
                 <div>
                     {#each data.tags as tag}
