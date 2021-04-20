@@ -9,7 +9,7 @@
     //
     let writings = "memuat...", dbWritings;
     axios.get(`/src/data/${on}/all-${on}.json`).then(res => {
-        if(res.statusText == "OK"){
+        if(res.status == 200){
             writings = res.data;
             dbWritings = writings;
         } else {

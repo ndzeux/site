@@ -14,7 +14,7 @@
     let  writings = "memuat...", projects = "memuat...", random, checker;
     async function getData(y, z){
         await axios.get("/src/data/" + y + "/all-" + y + ".json").then(res => {
-            if(res.statusText == "OK"){
+            if(res.status == 200){
                 z = [], checker = [];
                 for(let i = 0; i < 4;){
                     random = Math.floor(Math.random() * (res.data.length < 4 ? 4:res.data.length));
