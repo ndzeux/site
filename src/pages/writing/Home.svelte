@@ -13,6 +13,7 @@
             writings = res.data;
             dbWritings = writings;
         } else {
+            console.log(res);
             writings = "error";
         }
     }).catch(err => {
