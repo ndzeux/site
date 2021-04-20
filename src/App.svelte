@@ -57,6 +57,9 @@
 	<Router primary="{false}">
 		<Header {themeMode} />
 		<div class="pt-16 sm:pt-20" style="min-height: calc(100vh - {footerHeight}px);">
+			<Route path="*">
+				<Exception on="error" />
+			</Route>
 			<Route path="/">
 				<Loadable loader="{() => import("./pages/Home.svelte")}">
 					<div slot="loading"><Exception on="loading" /></div>
