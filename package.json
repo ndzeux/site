@@ -27,7 +27,6 @@
     "tailwindcss": "^2.1.1"
   },
   "dependencies": {
-    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "sirv-cli": "^1.0.0",
     "svelte-loadable": "^1.5.1",

@@ -10,7 +10,7 @@ import cleaner from 'rollup-plugin-cleaner';
 import sveltePreprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
-const isDev = Boolean(process.env.ROLLUP_WATCH);
+// const isDev = Boolean(process.env.ROLLUP_WATCH);
 
 function serve() {
 	let server;
@@ -29,6 +29,7 @@ function serve() {
 
 			process.on('SIGTERM', toExit);
 			process.on('exit', toExit);
+			bundle.close();
 		}
 	};
 }
@@ -59,7 +60,13 @@ export default [
 				},
 				preprocess: sveltePreprocess({
 					sourceMap: !production,
-					postcss: true,
+					postcss: {
+						plugins: [
+							require("tailwindcss"), 
+							require("autoprefixer"),
+							// require("postcss-nesting")
+						],
+					},
 				}),
 			}),
 			// we'll extract any component CSS out into
@@ -76,7 +83,7 @@ export default [
 			// https://github.com/rollup/plugins/tree/master/packages/commonjs
 			resolve({
 				browser: true,
-				dedupe: ['svelte']
+				dedupe: ['svelte'],
 			}),
 			commonjs(),
 
@@ -93,8 +100,8 @@ export default [
 			production && terser()
 		],
 		watch: {
-			clearScreen: false
-		}
+			clearScreen: false,
+		},
 	},
 	// // Server bundle
 	// {
