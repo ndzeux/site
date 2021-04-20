@@ -21,7 +21,6 @@
     }).finally(()=>{
         //
     });
-    $: console.log(writings);
     //
     let search = "", tags = "";
     let temp;
