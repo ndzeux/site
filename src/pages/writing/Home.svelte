@@ -13,7 +13,6 @@
             writings = res.data;
             dbWritings = writings;
         } else {
-            console.log(res);
             writings = "error";
         }
     }).catch(err => {
@@ -22,6 +21,7 @@
     }).finally(()=>{
         //
     });
+    $: console.log(writings);
     //
     let search = "", tags = "";
     let temp;
