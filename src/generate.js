@@ -26,7 +26,7 @@ let writingDir = "./public/src/data/writing/", projectsDir = "./public/src/data/
 console.time("time")
 async function generate(x, y, z){
     result = [];
-    dir = "./src/content/" + x + "/";
+    dir = "src/content/" + x + "/";
     fs.readdirSync(y).forEach(file => {
         fs.unlinkSync(y + file);
     })
