@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="mt-8 max-w-7xl mx-auto">
-        <div class="bg-white dark:bg-dbluegray border border-gray-100 dark:border-vdpink rounded-3xl p-4 duration-700" aos="true" aos-on="fade-up" aos-tolerance="third">
+        <div class="bg-white dark:bg-dbluegray border border-gray-100 dark:border-vdpink rounded-3xl p-4 duration-700" aos="true" aos-on="fade-up" aos-tolerance="150">
             <div class="header flex items-center justify-between">
                 <h2 class="text-xl sm:text-2xl sm:text-left flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin-bottom: -1px;">
