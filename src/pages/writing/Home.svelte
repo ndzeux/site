@@ -63,7 +63,9 @@
         document.querySelector("header div div nav a[href='/writing']").onclick = e => {
             e.preventDefault();
             tags = "";
-            queryWriting();
+            if(writings){
+                queryWriting();
+            }
         }
     }
     //

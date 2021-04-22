@@ -122,11 +122,6 @@
 <svelte:head>
     <title>{(typeof writing == "object" ? `${writing.title} - `:'')}{on[0].toUpperCase()}{on.slice(1).toLowerCase()} | Ndzeux</title>
     <style>
-        .post__content p {
-            line-height: 1.75em;
-            font-size: 1.125rem
-        }
-
         .post__content>*+*, .post__content p > *+div {
             margin-top: 1rem!important
         }
