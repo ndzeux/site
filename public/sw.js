@@ -1,4 +1,4 @@
-const CACHE_NAME = "ndzeux-v.0.0.1";
+const CACHE_NAME = "ndzeux-v.0.0.2";
 const CACHE_NAME_DYNAMIC = "ndzeux-v.0.0.1-d";
 const assets = [
     '/',

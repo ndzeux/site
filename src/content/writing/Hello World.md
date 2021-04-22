@@ -1,15 +1,11 @@
 <- - - - - - - - - - meta - - - - - - - - - ->
 title: Hello World
-thumbnail: /src/img/hero-j2.jpg
-description: Welcome to my site
-tags: svelte, sveltejs, tailwind, tailwindcss
-time: 1618788324754
+thumbnail: /src/img/hello-world-thumb.jpg
+description: Welcome to my personal website, bookmark it if you feel like it.
+tags: 
+time: 1618996620633
 <-- - - - - - - - - ndzeux - - - - - - - - -->
 
-![ndzeux](/src/logo/full.png)
-# Hello World
-Welcome to my site
-i just test it
-awkwkwk
+![Hello World](/src/img/hello-world.jpg)
 
-mntab
+Hello there, this is my first post on this site, nothing, just the beginning and greetings, so, welcome everyone 🙆‍♂️

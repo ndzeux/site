@@ -22,6 +22,8 @@
         //
     });
     //
+
+    //
     let search = "", tags = "";
     let temp;
     const queryWriting = () => {
@@ -47,6 +49,24 @@
         }, 25);
     }
     //
+    let first = true;
+    $: if(location.hash != "" && typeof writings == "object" && first){
+        first = false;
+        tags = location.hash.slice(1);
+        queryWriting();
+    }
+    window.addEventListener("hashchange", () => {
+        tags = location.hash.slice(1);
+        queryWriting();
+    });
+    if(window.innerWidth > 767){
+        document.querySelector("header div div nav a[href='/writing']").onclick = e => {
+            e.preventDefault();
+            tags = "";
+            queryWriting();
+        }
+    }
+    //
 </script>
 
 <svelte:head>
@@ -54,14 +74,14 @@
 </svelte:head>
 
 <div class="container mx-auto p-4" style="min-height: 320px;">
-    <div class="header sm:flex items-center justify-between text-center">
-        <h1 class="inline-block font-bold text-3xl pb-4 px-8 bbg">{on[0].toUpperCase()}{on.slice(1)}</h1>
+    <div class="header sm:flex items-center justify-between text-center duration-300" aos="true" aos-on="fade-down">
+        <h1 class="inline-block font-bold text-3xl pb-4 pr-8 bbg">{on[0].toUpperCase()}{on.slice(1)}</h1>
         <form class="mt-4 sm:mt-0 w-full sm:w-7/12 text-center sm:text-right">
             <input on:input="{queryWriting}" type="text" autocomplete="off" placeholder="🔍 Search... (# for hashtags)" class="text-base bg-gray-100 border-gray-200 focus:ring-gray-300 dark:bg-vdpink py-2 px-4 rounded-md border dark:border-dpink dark:text-pink-50 dark:placeholder-pink-200 dark:placeholder-opacity-50 focus:outline-none focus:ring-2 dark:focus:ring-dpink w-full max-w-xs" bind:value="{search}" />
         </form>
     </div>
     {#if tags || search}
-    <div class="flex flex-wrap items-center justify-center mt-4 sm:mt-0" transition:fly|local="{{ y: -10, duration: 50 }}">
+    <div class="flex flex-wrap items-center justify-center mt-4 sm:mt-0" transition:fly|local="{{ y: -10, duration: 200 }}">
         <span>Showing items by</span>
         {#if search && search[0] != "#"}
         <span class="flex items-center ml-1">
@@ -81,6 +101,7 @@
             Tag: {(tags == "" ? 'empty':tags)}
             <button class="bg-white rounded-full inline-flex items-center justify-center focus:outline-none w-5 h-5 lg:w-7 lg:h-7 relative ml-2" on:click="{() => {
                 tags = "";
+                location.hash = "";
                 if(search[0] == "#"){
                     search = "";
                 }
@@ -99,18 +120,18 @@
         <Exception on="loading" margin="mt-8 sm:mt-0" />
         {:else if writings != "error"}
         {#each writings as data, i}
-        <div class="w-6/12 lg:w-4/12 xl:w-3/12 p-2">
-            <div class="relative bg-white border-gray-100 dark:bg-dbluegray p-4 pb-10 rounded-lg border dark:border-vdpink h-full duration-500" aos="true" aos-offset="50" aos-on="fade-up" aos-tolerance="third">
+        <div class="w-full sm:w-6/12 lg:w-4/12 2xl:3/12 p-2">
+            <div class="relative bg-white border-gray-100 dark:bg-dbluegray p-4 pb-10 rounded-lg border dark:border-vdpink h-full duration-300" aos="true" aos-on="fade-up" aos-tolerance="third">
                 {#if data.thumbnail}
-                <div class="w-full relative overflow-hidden border border-gray-100 dark:border-mbluegray rounded-lg bg-gray-300 dark:bg-vdpink">
-                    <img src="{data.thumbnail}" alt="{data.title}" class="w-0 object-cover max-h-60" on:load="{(e) => {e.target.classList.remove("w-0");e.target.classList.add("w-full")}}">
+                <div class="w-full h-56 relative overflow-hidden border border-gray-100 dark:border-mbluegray rounded-lg bg-gray-300 dark:bg-vdpink">
+                    <img src="{data.thumbnail}" alt="{data.title}" class="w-0 object-cover h-full" on:load="{(e) => {e.target.classList.remove("w-0");e.target.classList.add("w-full")}}">
                 </div>
                 {/if}
                 <a use:link href="/{on}/{data.slug}" class="block mt-2"><h2 class="font-bold text-xl md:text-2xl">{data.title}</h2></a>
                 <p class="md:text-lg">{data.description}</p>
                 <div>
                     {#each data.tags as tag}
-                    <span on:click="{() => { tags = (tag ? tag:""); queryWriting() }}" class="inline-block mt-2 mr-2 py-1 px-2 bg-gray-100 dark:bg-mbluegray rounded cursor-pointer text-sm lg:text-base">{(tag ? tag:'other')}</span>
+                    <span on:click="{() => { tags = (tag ? tag:""); location.hash = tag; queryWriting() }}" class="inline-block mt-2 mr-2 py-1 px-2 bg-gray-100 dark:bg-mbluegray rounded cursor-pointer text-sm lg:text-base">{(tag ? tag:'other')}</span>
                     {/each}
                 </div>
                 <span class="text-xs sm:text-sm opacity-80 absolute right-4 bottom-3">{setTime2(data.time)}</span>
@@ -124,11 +145,3 @@
         {/if}
     </div>  
 </div>
-
-<style>
-    @media(max-width: 500px){
-        .lists > div{
-            width: 100%!important;
-        }
-    }
-</style>

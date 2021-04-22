@@ -1,10 +1,9 @@
 let elm;
 // aos
-let offset, tolerance, on;
+let tolerance, on;
 function aos(elm){
     elm.forEach(el => {
         on = el.getAttribute("aos-on") || "fade";
-        offset = parseInt(el.getAttribute("aos-offset")) || 100;
         tolerance = el.getAttribute("aos-tolerance");
         if(!tolerance){
             tolerance = 100;

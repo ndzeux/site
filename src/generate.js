@@ -1,10 +1,20 @@
 // generate all writing, projects and portofolio from markdown files
 const fs = require("fs");
 const path = require("path");
-const commonmark = require("commonmark");
-//  
-const reader = new commonmark.Parser();
-const writer = new commonmark.HtmlRenderer({ softbreak: "<br />" });
+var md = require('markdown-it')({
+    html:         true,
+    xhtmlOut:     false,
+    breaks:       false,
+    langPrefix:   'language-',
+    linkify:      true,
+    typographer:  true,
+    quotes: '“”‘’',
+    highlight: function (/*str, lang*/) { return ''; }
+})
+.use(require("markdown-it-sub"))
+.use(require("markdown-it-sup"))
+.use(require("markdown-it-mark"));
+
 //
 let result, result2;
 let ext, meta;
@@ -26,21 +36,21 @@ async function generate(x, y, z){
         if(ext == ".md"){
             data = fs.readFileSync(dir + file, { encoding: "utf8" });
             meta = data.split("<- - - - - - - - - - meta - - - - - - - - - ->\n")[1].split("\n<-- - - - - - - - - ndzeux - - - - - - - - -->")[0];
-            title = meta.split("title: ")[1].split("\n")[0];
-            slug = file.toLowerCase().replace(/[^\w-]+/g, ' ').trim().replace(/ /g, "-");
+            title = meta.split("title: ")[1].split("\n")[0].trim();
+            slug = file.slice(0, -3).toLowerCase().replace(/[^\w-]+/g, ' ').trim().replace(/ /g, "-");
             thumbnail = meta.split("thumbnail: ")[1].split("\n")[0];
             description = meta.split("description: ")[1].split("\n")[0];
             tags = meta.split("tags: ")[1].split("\n")[0].split(", ");
             if(tags.indexOf("") > -1){
                 tags[0] = "other";
             }
-            body = reader.parse(data.split("<-- - - - - - - - - ndzeux - - - - - - - - -->\n\n")[1]);
+            body = md.render(data.split("<-- - - - - - - - - ndzeux - - - - - - - - -->\n\n")[1]);
             time = meta.split("time: ")[1].split("\n")[0];
             result.push({
                 title, slug, thumbnail, description, tags, time
             });
             result2 = JSON.stringify({
-                title, slug, thumbnail, description, tags, time, body: writer.render(body).replace(/\n/g, "")
+                title, slug, thumbnail, description, tags, time, body
             });
             fs.writeFileSync(y + slug + ".json", result2);
         }

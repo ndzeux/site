@@ -6,7 +6,7 @@
 	<meta name="theme-color" content="#033246" />
 	<title>Ndzeux</title>
 	<meta name="description" content="Just a site by Ndzeux" />
-	<link rel="manifest" href="manifest.json">
+	<link rel="manifest" href="/manifest.json">
 	<style>
 		@font-face {
 			font-family: 'Monda';
@@ -33,11 +33,13 @@
 			unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 		}
 		:root{
-			--link: #c3487e;
+			--link: #9c00cc;
 			--blb: #ddd;
 			--scr: #aaa;
 			--scrbg: #ddd;
 			--bbgc: linear-gradient(to right, #9c00cc, #d162f3, rgba(209, 98, 243, .5), rgba(0,0,0,0));
+			--bgcode: #efefef;
+			--code: #666;
 		}
 		html.dark{
 			--link: #FCB1D2;
@@ -45,6 +47,8 @@
 			--scr: #C796C1;
 			--scrbg: #5F648C;
 			--bbgc: linear-gradient(to right, #9773bd, #927DA9, rgba(146, 125, 169, .5), rgba(0,0,0,0));
+			--bgcode: #5F648C;
+			--code: #ffe1ed;
 		}
 		html {
 			scrollbar-color: var(--scr) var(--scrbg);
@@ -84,6 +88,9 @@
 		.-top-30percent{
 			top: -30%;
 		}
+		.duration-0{
+			transition-duration: 0ms;
+		}
 		[aos=true]:not([aos-on^=flip]),html:not(.no-js) [aos-on^=fade][aos-on^=fade]{opacity:0;transition-property:opacity,-webkit-transform;transition-property:opacity,transform;transition-property:opacity,transform,-webkit-transform}html:not(.no-js) [aos-on^=fade][aos-on^=fade].aos-animate{opacity:1;-webkit-transform:none;transform:none}html:not(.no-js) [aos-on=fade-up]{-webkit-transform:translate3d(0,100px,0);transform:translate3d(0,100px,0)}html:not(.no-js) [aos-on=fade-down]{-webkit-transform:translate3d(0,-100px,0);transform:translate3d(0,-100px,0)}html:not(.no-js) [aos-on=fade-right]{-webkit-transform:translate3d(-100px,0,0);transform:translate3d(-100px,0,0)}html:not(.no-js) [aos-on=fade-left]{-webkit-transform:translate3d(100px,0,0);transform:translate3d(100px,0,0)}html:not(.no-js) [aos-on=fade-up-right]{-webkit-transform:translate3d(-100px,100px,0);transform:translate3d(-100px,100px,0)}html:not(.no-js) [aos-on=fade-up-left]{-webkit-transform:translate3d(100px,100px,0);transform:translate3d(100px,100px,0)}html:not(.no-js) [aos-on=fade-down-right]{-webkit-transform:translate3d(-100px,-100px,0);transform:translate3d(-100px,-100px,0)}html:not(.no-js) [aos-on=fade-down-left]{-webkit-transform:translate3d(100px,-100px,0);transform:translate3d(100px,-100px,0)}html:not(.no-js) [aos-on^=zoom][aos-on^=zoom]{opacity:0;transition-property:opacity,-webkit-transform;transition-property:opacity,transform;transition-property:opacity,transform,-webkit-transform}html:not(.no-js) [aos-on^=zoom][aos-on^=zoom].aos-animate{opacity:1;-webkit-transform:translateZ(0) scale(1);transform:translateZ(0) scale(1)}html:not(.no-js) [aos-on=zoom-in]{-webkit-transform:scale(.6);transform:scale(.6)}html:not(.no-js) [aos-on=zoom-in-up]{-webkit-transform:translate3d(0,100px,0) scale(.6);transform:translate3d(0,100px,0) scale(.6)}html:not(.no-js) [aos-on=zoom-in-down]{-webkit-transform:translate3d(0,-100px,0) scale(.6);transform:translate3d(0,-100px,0) scale(.6)}html:not(.no-js) [aos-on=zoom-in-right]{-webkit-transform:translate3d(-100px,0,0) scale(.6);transform:translate3d(-100px,0,0) scale(.6)}html:not(.no-js) [aos-on=zoom-in-left]{-webkit-transform:translate3d(100px,0,0) scale(.6);transform:translate3d(100px,0,0) scale(.6)}html:not(.no-js) [aos-on=zoom-out]{-webkit-transform:scale(1.2);transform:scale(1.2)}html:not(.no-js) [aos-on=zoom-out-up]{-webkit-transform:translate3d(0,100px,0) scale(1.2);transform:translate3d(0,100px,0) scale(1.2)}html:not(.no-js) [aos-on=zoom-out-down]{-webkit-transform:translate3d(0,-100px,0) scale(1.2);transform:translate3d(0,-100px,0) scale(1.2)}html:not(.no-js) [aos-on=zoom-out-right]{-webkit-transform:translate3d(-100px,0,0) scale(1.2);transform:translate3d(-100px,0,0) scale(1.2)}html:not(.no-js) [aos-on=zoom-out-left]{-webkit-transform:translate3d(100px,0,0) scale(1.2);transform:translate3d(100px,0,0) scale(1.2)}html:not(.no-js) [aos-on^=slide][aos-on^=slide]{transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform;visibility:hidden}html:not(.no-js) [aos-on^=slide][aos-on^=slide].aos-animate{visibility:visible;-webkit-transform:translateZ(0);transform:translateZ(0)}html:not(.no-js) [aos-on=slide-up]{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}html:not(.no-js) [aos-on=slide-down]{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}html:not(.no-js) [aos-on=slide-right]{-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}html:not(.no-js) [aos-on=slide-left]{-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}html:not(.no-js) [aos-on^=flip][aos-on^=flip]{-webkit-backface-visibility:hidden;backface-visibility:hidden;transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform}html:not(.no-js) [aos-on=flip-left]{-webkit-transform:perspective(2500px) rotateY(-100deg);transform:perspective(2500px) rotateY(-100deg)}html:not(.no-js) [aos-on=flip-left].aos-animate{-webkit-transform:perspective(2500px) rotateY(0);transform:perspective(2500px) rotateY(0)}html:not(.no-js) [aos-on=flip-right]{-webkit-transform:perspective(2500px) rotateY(100deg);transform:perspective(2500px) rotateY(100deg)}html:not(.no-js) [aos-on=flip-right].aos-animate{-webkit-transform:perspective(2500px) rotateY(0);transform:perspective(2500px) rotateY(0)}html:not(.no-js) [aos-on=flip-up]{-webkit-transform:perspective(2500px) rotateX(-100deg);transform:perspective(2500px) rotateX(-100deg)}html:not(.no-js) [aos-on=flip-up].aos-animate{-webkit-transform:perspective(2500px) rotateX(0);transform:perspective(2500px) rotateX(0)}html:not(.no-js) [aos-on=flip-down]{-webkit-transform:perspective(2500px) rotateX(100deg);transform:perspective(2500px) rotateX(100deg)}html:not(.no-js) [aos-on=flip-down].aos-animate{-webkit-transform:perspective(2500px) rotateX(0);transform:perspective(2500px) rotateX(0)}
 		</style>
 	<link rel="apple-touch-icon" href="/src/logo/192.png">
@@ -92,15 +99,22 @@
 	<script defer type="module" src='/build/main.js'></script>
 </head>
 <body style="overflow: hidden;">
+	<div id="loader"
+		class="flex justify-center items-center fixed z-50 top-0 right-0 bottom-0 left-0 bg-gray-50 dark:bg-dbluegray">
+		<svg class="animate-spin sm:-mt-6 sm:-ml-6 h-10 w-10 sm:w-12 sm:h-12 text-gray-300 dark:text-dpink" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+			<circle class="opacity-50" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+			<path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+		</svg>
+	</div>
 </body>
 <script>
-	if('serviceWorker' in navigator){
-		navigator.serviceWorker.register('/sw.js').then(reg => {
-			console.log("Service Worker registered", reg);
-		}).catch(err => {
-			console.log(err);
-			console.log("Service Worker not registered");
-		})
-	}
+	// if('serviceWorker' in navigator){
+	// 	navigator.serviceWorker.register('/sw.js').then(reg => {
+	// 		console.log("Service Worker registered", reg);
+	// 	}).catch(err => {
+	// 		console.log(err);
+	// 		console.log("Service Worker not registered");
+	// 	})
+	// }
 </script>
 </html>

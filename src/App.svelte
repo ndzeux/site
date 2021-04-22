@@ -34,6 +34,7 @@
 		return document.querySelector(elm).offsetHeight;
 	}
 	onMount(()=>{
+		document.querySelector("#loader").remove();
 		headerHeight = getHeight("header");
 		footerHeight = getHeight("footer");
 		window.addEventListener("resize", () => {
@@ -47,8 +48,8 @@
 
 <div id="app" class="relative font-default text-base sm:text-lg lg:text-xl bg-gray-50 dark:bg-mbluegray text-gray-600 dark:text-pink-50 min-h-screen" style="min-width: 280px;">
 	{#if !webReady}
-	<div class="flex justify-center items-center fixed z-50 top-0 right-0 bottom-0 left-0 bg-dbluegray" transition:fade>
-		<div class="logoicon w-20 h-20 md:w-28 md:h-28 md:rounded-3xl shadow-xl bg-mbluegray animate-bounce relative" style="border-radius: 24px;">
+	<div class="flex justify-center items-center fixed z-50 top-0 right-0 bottom-0 left-0 bg-gray-50 dark:bg-dbluegray" transition:fade>
+		<div class="logoicon w-20 h-20 md:w-28 md:h-28 md:rounded-3xl shadow-xl bg-gray-400 dark:bg-mbluegray animate-bounce relative" style="border-radius: 24px;">
 			<img on:load="{(e) => e.target.style = "width:100%;height:auto"}" src="/src/logo/192.png" alt="Ndzeux" class="relative z-10" style="width:0" />
 			<span class="absolute z-0 top-0 right-0 bottom-0 left-0 text-6xl text-white font-bold flex items-center justify-center" style="font-family: sans-serif;">N</span>
 		</div>
@@ -58,7 +59,7 @@
 		<Header {themeMode} />
 		<div class="pt-16 sm:pt-20" style="min-height: calc(100vh - {footerHeight}px);">
 			<Route path="*">
-				<Exception on="error" />
+				<Exception on="empty" information="Page not found" />
 			</Route>
 			<Route path="/">
 				<Loadable loader="{() => import("./pages/Home.svelte")}">
@@ -76,8 +77,11 @@
 						<div slot="loading"><Exception on="loading" /></div>
 					</Loadable>
 				</Route>
+				<Route path="*">
+					<Exception on="empty" information="Page not found" />
+				</Route>
 				<Route path=":slug" let:params>
-					<Loadable loader="{() => import("./pages/writing/[slug].svelte")}" slug="{params.slug}">
+					<Loadable loader="{() => import("./pages/writing/[slug].svelte")}" slug="{params.slug}" on="writing">
 						<div slot="loading"><Exception on="loading" /></div>
 					</Loadable>
 				</Route>
@@ -89,7 +93,7 @@
 					</Loadable>
 				</Route>
 				<Route path=":slug" let:params>
-					<Loadable loader="{() => import("./pages/writing/[slug].svelte")}" slug="{params.slug}">
+					<Loadable loader="{() => import("./pages/writing/[slug].svelte")}" slug="{params.slug}" on="projects">
 						<div slot="loading"><Exception on="loading" /></div>
 					</Loadable>
 				</Route>
@@ -101,7 +105,7 @@
 					</Loadable>
 				</Route>
 				<Route path=":slug" let:params>
-					<Loadable loader="{() => import("./pages/writing/[slug].svelte")}" slug="{params.slug}">
+					<Loadable loader="{() => import("./pages/writing/[slug].svelte")}" slug="{params.slug}" on="portofolio">
 						<div slot="loading"><Exception on="loading" /></div>
 					</Loadable>
 				</Route>

@@ -1,6 +1,7 @@
 <script>
     import { fade } from "svelte/transition";
     export let on = "loading";
+    export let information = "Empty items"
     export let margin = "m-0";
 </script>
 <div class="absolute top-2/4 left-2/4 text-center {margin}" in:fade="{{ duration: 100 }}">
@@ -13,11 +14,11 @@
     <svg xmlns="http://www.w3.org/2000/svg" class="-mt-5 -ml-5 sm:-mt-6 sm:-ml-6 h-10 w-10 sm:w-12 sm:h-12 text-gray-300 dark:text-dpink dark:text-opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
     </svg>
-    <span class="text-gray-300 dark:text-dpink dark:text-opacity-60 -ml-full">Empty items</span>
+    <span class="text-gray-300 dark:text-dpink dark:text-opacity-60 -ml-full">{information}</span>
     {:else if on == "error"}
     <svg xmlns="http://www.w3.org/2000/svg" class="-mt-5 -ml-5 sm:-mt-6 sm:-ml-6 h-10 w-10 sm:w-12 sm:h-12 text-gray-300 dark:text-dpink dark:text-opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
-    <span class="text-gray-300 dark:text-dpink -ml-full dark:text-opacity-60">Error occurred</span>
+    <span class="text-gray-300 dark:text-dpink -ml-full dark:text-opacity-60">Error occured</span>
     {/if}
 </div>

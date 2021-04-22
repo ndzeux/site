@@ -33,12 +33,12 @@
     window.addEventListener("resize", () => {
         windowSize = window.innerWidth;
     });
-    let process;
+    let processya;
     const showNav = (e) => {
-        if(typeof e == 'undefined' || window.innerWidth > 767 || process || (e == "true" && !shownav)){
+        if(typeof e == 'undefined' || window.innerWidth > 767 || processya || (e == "true" && !shownav)){
             return false;
         }
-        process = true;
+        processya = true;
         shownav = !shownav;
         if(shownav){
             document.body.style.overflow = "hidden";
@@ -48,7 +48,7 @@
             location.hash = "";
         }
         setTimeout(()=>{
-            process = false;
+            processya = false;
         }, 300);
     }
     window.addEventListener("hashchange", () => {
@@ -77,15 +77,14 @@
                 <a use:link href="/portofolio" class="h-20 px-4 lg:px-8 max-w-max mx-auto md:max-w-none flex items-center justify-center relative {(url.indexOf('/portofolio') > -1 ? 'hover':'')}">Portofolio</a>
             </nav>
             {/if}
-            <button on:click="{toggleThemeMode}" class="text-dbluegray bg-gray-100 dark:text-white dark:bg-yellow-400 rounded-full w-12 h-12 ml-4 lg:ml-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-yellow-400 focus:ring-offset-2 ring:offset-gray-100">
+            <button aria-label="toggle-mode-btn" on:click="{toggleThemeMode}" class="text-dbluegray bg-gray-100 dark:text-white dark:bg-yellow-400 rounded-full w-12 h-12 ml-4 lg:ml-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-yellow-400 focus:ring-offset-2 ring:offset-gray-100">
                 {#if themeMode}
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                 {:else}
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                        ad06e2      </svg>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 {/if}
             </button>
             <button on:click="{showNav}" aria-label="open-menu-btn"
