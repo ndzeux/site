@@ -59,14 +59,7 @@ export default [
 				},
 				preprocess: sveltePreprocess({
 					sourceMap: !production,
-					postcss: {
-						plugins: [
-							require("tailwindcss"), 
-							require("autoprefixer"),
-							require("cssnano")
-							// require("postcss-nesting")
-						],
-					},
+					postcss: true,
 				}),
 			}),
 			// we'll extract any component CSS out into

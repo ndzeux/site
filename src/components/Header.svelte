@@ -1,122 +1,53 @@
 <script>
-    import { fade } from "svelte/transition";
     import { link, useLocation } from "svelte-navigator";
-    
-    export let themeMode;
     //
     const location = useLocation();
-    let url;
-    $: url = $location.pathname;
+    let path;
+    $: path = $location.pathname;
     //
-    const toggleThemeMode = () => {
-        if(themeMode){
-            localStorage.theme = '';
-            themeMode = '';
-            document.documentElement.classList.remove('dark')
-        } else {
-            document.documentElement.classList.add('dark')
-            localStorage.theme = 'dark';
-            themeMode = 'dark';
-        }
-    }
-    //
-    const showblb = e => {
-        e.target.classList.add("hover");
-    }
-    const hideblb = e => {
-        if(url != e.target.pathname){
-            e.target.classList.remove("hover");
-        }
-    }
-    //
-    let shownav, windowSize = window.innerWidth;
-    window.addEventListener("resize", () => {
-        windowSize = window.innerWidth;
+    let posY = window.scrollY;
+    window.addEventListener("scroll", () => {
+        posY = window.scrollY;
     });
-    let processya;
-    const showNav = (e) => {
-        if(typeof e == 'undefined' || window.innerWidth > 767 || processya || (e == "true" && !shownav)){
-            return false;
-        }
-        processya = true;
-        shownav = !shownav;
-        if(shownav){
-            document.body.style.overflow = "hidden";
-            location.hash = "mwo";
-        } else {
-            document.body.style.overflow = "";
-            location.hash = "";
-        }
-        setTimeout(()=>{
-            processya = false;
-        }, 300);
-    }
-    window.addEventListener("hashchange", () => {
-        if(location.hash == ""){
-            shownav = false;
-            document.body.style.overflow = "";
-            location.hash = "";
+    //
+    let heroHeight = 100;
+    window.addEventListener("load", ()=>{
+        if(path == '/'){
+            setTimeout(()=>{
+                let hero = document.querySelector(".hero");
+                heroHeight = hero.offsetHeight;
+                window.addEventListener("resize", () => {
+                    heroHeight = hero.offsetHeight;
+                });
+            }, 50);
         }
     });
+    //
 </script>
 
-<header class="border-b border-gray-200 dark:border-vdpink bg-white text-dbluegray dark:bg-dbluegray dark:text-white fixed top-0 right-0 left-0 z-40">
-    <div class="container flex items-center justify-between mx-auto p-4 h-16 sm:h-20" on:click="{(e) => {
-        if(e.target.tagName != "BUTTON"){
-            showNav("true");
-        }
-    }}">
-        <a href="/" use:link><h2 class="text-3xl sm:text-4xl font-bold font-berait">ndzeux</h2></a>
-        <div class="flex items-center justify-end w-full">
-            {#if shownav || windowSize > 767}
-            <nav class="items-center fixed z-10 top-16 sm:top-20 left-0 right-0 -bottom-16 pt-10 bg-white dark:bg-dbluegray md:bg-transparent md:dark:bg-transparent md:pt-0 md:static md:flex" on:mouseover="{showblb}" on:mouseout="{hideblb}" on:click="{showNav}" transition:fade="{{ duration: 200 }}">
-                <a use:link href="/" class="h-20 px-4 lg:px-8 max-w-max mx-auto md:max-w-none flex items-center justify-center relative {(url == '/' ? 'hover':'')}">Home</a>
-                <a use:link href="/about" class="h-20 px-4 lg:px-8 max-w-max mx-auto md:max-w-none flex items-center justify-center relative {(url == '/about' ? 'hover':'')}">About</a>
-                <a use:link href="/writing" class="h-20 px-4 lg:px-8 max-w-max mx-auto md:max-w-none flex items-center justify-center relative {(url.indexOf('/writing') > -1 ? 'hover':'')}">Writing</a>
-                <a use:link href="/projects" class="h-20 px-4 lg:px-8 max-w-max mx-auto md:max-w-none flex items-center justify-center relative {(url.indexOf('/projects') > -1 ? 'hover':'')}">Projects</a>
-                <a use:link href="/portofolio" class="h-20 px-4 lg:px-8 max-w-max mx-auto md:max-w-none flex items-center justify-center relative {(url.indexOf('/portofolio') > -1 ? 'hover':'')}">Portofolio</a>
-            </nav>
-            {/if}
-            <button aria-label="toggle-mode-btn" on:click="{toggleThemeMode}" class="text-dbluegray bg-gray-100 dark:text-white dark:bg-yellow-400 rounded-full w-12 h-12 ml-4 lg:ml-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-yellow-400 focus:ring-offset-2 ring:offset-gray-100">
-                {#if themeMode}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                {:else}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-                {/if}
+
+<header class="bg-indigo-800 {(posY < 10 && path == '/' ? 'bg-opacity-0':(posY < heroHeight - 72 && path == '/' ? 'bg-opacity-60':''))} fixed top-0 left-0 right-0 z-40 {(path == '/' ? 'transition-all duration-500':'')}">
+    <div class="h-16 sm:h-20 container mx-auto px-4 flex items-center justify-between text-white">
+        <a href="/" use:link class="logo flex items-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 sm:h-14 sm:w-14 mr-1 filter drop-shadow-2xl" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2 sm:h-4 sm:w-4 absolute left-4 -mb-3 sm:left-5 sm:-mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+            </svg>
+            <h1 class="font-semibold text-lg leading-4 sm:text-3xl sm:leading-7 font-berait tracking-wider filter drop-shadow-2xl">Qrco<br>Store</h1>
+        </a>
+        <div class="menu flex items-center justify-center">
+            <button aria-label="search button" class="text-indigo-700 bg-indigo-50 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow flex items-center justify-center filter drop-shadow-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
             </button>
-            <button on:click="{showNav}" aria-label="open-menu-btn"
-            class="text-dbluegray dark:text-white ml-4 bg-gray-100 dark:bg-mbluegray rounded-md w-12 h-12 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-mbluegray focus:ring-offset-2 ring:offset-gray-100 dark:ring-offset-dbluegray md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+            <button aria-label="qrcode scanner" class="text-indigo-700 bg-indigo-50 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow flex items-center justify-center filter drop-shadow-2xl ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                 </svg>
             </button>
         </div>
     </div>
 </header>
-
-<style>
-    @media(max-width: 767px){
-        nav{
-            margin-top: 1px;
-            animation: muncul .3s;
-        }
-    }
-    nav a::after{
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 3px;
-        border-radius: 6px;
-        background: var(--blb);
-        transform: scale(0);
-        transition: transform .3s;
-    }
-    :global(nav .hover::after){
-        transform: scale(1)!important;
-    }
-</style>
